@@ -32,7 +32,7 @@
 					# Specify your home configuration modules here, for example,
 					# the path to your home.nix.
 					modules = [
-						./home-configuration.nix
+						./home-manager/home.nix
 					];
 
 					# Optionally use extraSpecialArgs
@@ -49,7 +49,7 @@
 					{
 						home-manager.useGlobalPkgs = true;
 						home-manager.useUserPackages = true;
-						home-manager.users.jd = import ./home-configuration.nix;
+						home-manager.users.jd = import ./home-manager/home.nix;
 					}
         ];
       };

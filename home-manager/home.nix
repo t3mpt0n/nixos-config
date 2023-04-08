@@ -37,7 +37,7 @@
     # '')
 		pkgs.fira-code
 		pkgs.fira-code-symbols
-		pkgs.kitty-themes-unstable
+		# pkgs.kitty-themes-unstable
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
