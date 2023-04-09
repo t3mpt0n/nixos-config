@@ -115,6 +115,7 @@
     packages = with pkgs; [
       firefox
       thunderbird
+			kitty-themes
     ];
   };
 

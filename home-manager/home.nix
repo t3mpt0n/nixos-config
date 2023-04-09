@@ -1,7 +1,14 @@
 { config, pkgs, ... }:
 
 {
-	imports = [ ./git.nix ./picom.nix ./windowmanager.nix ./sxhkd.nix ./kitty.nix ./rofi.nix ];
+	imports = [ ./git.nix
+							./picom.nix
+							./windowmanager.nix
+							./sxhkd.nix
+							./kitty.nix
+							./rofi.nix
+							./lf.nix
+						];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "jd";
@@ -37,7 +44,7 @@
     # '')
 		pkgs.fira-code
 		pkgs.fira-code-symbols
-		# pkgs.kitty-themes-unstable
+		pkgs.kitty-themes
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
