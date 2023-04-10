@@ -1,14 +1,19 @@
 { config, pkgs, ... }:
 
 {
-	imports = [ ./git.nix
-							./picom.nix
-							./windowmanager.nix
-							./sxhkd.nix
-							./kitty.nix
-							./rofi.nix
-							./lf.nix
-						];
+	# Modules
+	imports = [
+		./git.nix
+		./picom.nix
+		./windowmanager.nix
+		./sxhkd.nix
+		./kitty.nix
+		./rofi.nix
+		./lf.nix
+		./emacs/init.nix
+	];
+	modules.git.enable = true;
+	
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "jd";
@@ -73,8 +78,10 @@
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
-    EDITOR = "emacsclient -c -a 'emacs'";
+    # EDITOR = "emacsclient -c -a 'emacs'";
+		# EDITOR = "nvim";
 		BROWSER = "firefox";
+		TERMINAL = "kitty";
   };
 
   programs = {

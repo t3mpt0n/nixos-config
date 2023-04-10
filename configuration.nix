@@ -132,6 +132,9 @@
 		unstable.discord
 		gnupg
 		pinentry
+		psmisc
+		xorg.xkill
+		xorg.xprop
   ];
 
   nix = {
@@ -175,7 +178,7 @@
   	enable = true;
 		passwordAuthentication = false;
 		kbdInteractiveAuthentication = false;
-	# permitRootLogin = "yes";
+		permitRootLogin = "no";
   };
 
   # Open ports in the firewall.

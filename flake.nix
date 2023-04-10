@@ -4,13 +4,15 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 		home-manager.url = "github:nix-community/home-manager/release-22.11";
+		emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
   outputs = {
-    self
+			self
     , nixpkgs
     , nixpkgs-unstable
 		, home-manager
+		, emacs-overlay
   }:
   let
     system = "x86_64-linux";
@@ -20,7 +22,6 @@
         config.allowUnfree = true;
       };
     };
-    # sshkey="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILcon6Pn5nLNXEuLH22ooNR97ve290d2tMNjpM8cTm2r lunarix@masterbook";
   in {
 		homeConfigurations.jd = let
 			system = "x86_64-linux";
@@ -43,7 +44,7 @@
 				inherit system;
 				specialArgs = { inherit self; };
 				modules = [
-					({config, pkgs, ...}: { nixpkgs.overlays = [ (overlay-unstable system) ]; })
+					({config, pkgs, ...}: { nixpkgs.overlays = [ (overlay-unstable system) (import self.inputs.emacs-overlay)]; })
 					./configuration.nix
 					home-manager.nixosModules.home-manager
 					{

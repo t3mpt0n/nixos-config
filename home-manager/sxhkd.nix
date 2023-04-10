@@ -17,9 +17,9 @@
 			## Expand and Contract Windows
 			"super + alt {h,j,k,l}" = "bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}";
 			"super + alt + shift + {h,j,k,l}" = "bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}";
-			"super + {grave,Tab}" = "bspc node -v {-20 0,0 20,0 -20,20 0}"; # Move a floating window
+			"super + {grave,Tab}" = "bspc {node,desktop} -f last"; # Move a floating window
 			"super + ctrl + {m,x,y,z}" = "bspc node -g {marked,locked,sticky,private}"; # Set the node flags
-			"super + bracket{left,right}" = "bspc {node,desktop} -f last"; # Focus next/prev desktop in monitor
+			"super + bracket{left,right}" = "bspc desktop -f {prev,next}.local"; # Focus next/prev desktop in monitor
 			"super + {o,i}" = "bspc wm -h off; bspc node {older,newer} -f; bspc wm -h on"; # Focus older or newer node in focus history
 
 			# Apps
