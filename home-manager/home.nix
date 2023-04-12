@@ -12,8 +12,14 @@
 		./lf.nix
 		./emacs/init.nix
 	];
-	modules.git.enable = true;
-	
+
+	t3mpt0n = {
+		emacs = {
+			enable = true;
+			packages = true;
+		};
+	};
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "jd";
@@ -50,6 +56,8 @@
 		pkgs.fira-code
 		pkgs.fira-code-symbols
 		pkgs.kitty-themes
+		pkgs.cmake
+		pkgs.libvterm
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
