@@ -7,8 +7,7 @@
 			userName = "t3mpt0n";
 
 			signing = {
-				gpgPath = "${pkgs.gnupg}/bin/gpg2";
-				key = "2A1E424A544032DE";
+				key = "~/.ssh/id_rsa.pub";
 				signByDefault = true;
 			};
 
@@ -30,6 +29,8 @@
 						header = "bold white";
 					};
 				};
+				commit.gpgSign = true;
+				gpg.format = "ssh";
 			};
 		};
 	};

@@ -9,11 +9,12 @@ in {
 	options.t3mpt0n.emacs.enable = mkEnableOption "emacs service";
 
 	config = mkIf cfg.enable {
+		programs.emacs.enable = true;
 		services.emacs = {
 			enable = true;
 			defaultEditor = true;
-			package = pkgs.emacsUnstable;
-			client.arguments = [ "-c" "-a" "'emacs'" ];
+			package = pkgs.emacs-unstable;
+			client.arguments = [ "-c" "-a" "'emacs'"];
 		};
 	};
 }

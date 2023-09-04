@@ -2,7 +2,7 @@
 {
 	xsession.windowManager = {
 		bspwm = {
-			enable = true;
+			enable = false;
 			settings = {
 				border_width = 2;
 				window_gap = 12;

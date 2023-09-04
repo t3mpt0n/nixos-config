@@ -62,28 +62,28 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
 
   # Enable the GNOME Desktop Environment.
     # services.xserver.displayManager.gdm.enable = true;
 #   services.xserver.desktopManager.gnome.enable = true;
-	services.xserver = {
-		displayManager = {
-			startx.enable = true;
-			lightdm.enable = lib.mkForce false;
-			gdm.enable = lib.mkForce false;
-		};
-		windowManager = {
-			bspwm.enable = true;
-		};
-	};
-	environment.etc = {
-		"X11/xinit/xinitrc".text = ''
-		#!/bin/sh
-		exec bspwm
-		'';
-	};
+# 	services.xserver = {
+# 		displayManager = {
+# 			startx.enable = true;
+# 			lightdm.enable = lib.mkForce false;
+# 			gdm.enable = lib.mkForce false;
+# 		};
+# 		windowManager = {
+# 			bspwm.enable = true;
+# 		};
+# 	};
+# 	environment.etc = {
+# 		"X11/xinit/xinitrc".text = ''
+# 		#!/bin/sh
+# 		exec bspwm
+# 		'';
+# 	};
 
 	# Configure keymap in X11
   # services.xserver.layout = "us";
@@ -106,35 +106,32 @@
 	};
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jd = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "video" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      firefox
-      thunderbird
-			kitty-themes
-    ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim 
+		wayland
+    neovim
     wget
     emacs
     openssh
     neofetch
-		git
-		doas
-		unstable.discord
-		gnupg
-		pinentry
-		psmisc
-		xorg.xkill
-		xorg.xprop
+    git
+    doas
+    gnupg
+    pinentry
+    psmisc
+    libtool
+    gnumake
+    libgccjit
+		usbutils
   ];
 
   nix = {
@@ -142,12 +139,19 @@
 		experimental-features = [ "nix-command" "flakes" ];
 		auto-optimise-store = true;
 	};
-	gc = {
-		automatic = true;
-		dates = "weekly";
-		options = "--delete-older-than 30d";
-	  };
+		gc = {
+			automatic = true;
+			dates = "weekly";
+			options = "--delete-older-than 30d";
+		};
   };
+	nixpkgs = {
+		config = {
+			allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+				"discord"
+			];
+		};
+	};
 
 	security = {
 		doas = {
@@ -157,6 +161,9 @@
 				keepEnv = true;
 				persist = true;
 			}];
+		};
+		polkit = {
+			enable = true;
 		};
 		sudo.enable = false;
 	};
@@ -169,16 +176,26 @@
     enableSSHSupport = true;
     pinentryFlavor = "tty";
   };
-  services.dbus.packages = [ pkgs.gcr ];
+	services.dbus = {
+		enable = true;
+		packages = [ pkgs.gcr ];
+	};
+	xdg.portal = {
+		enable = true;
+		wlr.enable = true;
+		extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+	};
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh = {
   	enable = true;
-		passwordAuthentication = false;
-		kbdInteractiveAuthentication = false;
-		permitRootLogin = "no";
+		settings = {
+			PasswordAuthentication = false;
+			KbdInteractiveAuthentication = false;
+			PermitRootLogin = "no";
+		};
   };
 
   # Open ports in the firewall.

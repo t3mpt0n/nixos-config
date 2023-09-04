@@ -5,9 +5,20 @@ let
 in {
 	options.t3mpt0n.emacs.packages = mkEnableOption "emacs packages";
 
-	config = mkIf config.t3mpt0n.emacs.enable {
+	config = mkIf config.t3mpt0n.emacs.packages {
 		programs.emacs = {
-			enable = true;
+			extraPackages = epgks: with pkgs.emacsPackages; [
+				use-package
+				ligature
+				undo-tree
+				doom-themes
+				doom-modeline
+				smartparens
+				vterm
+				eglot
+				eglot-java
+				magit
+				nix-mode ];
 		};
 	};
 }

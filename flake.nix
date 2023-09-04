@@ -1,9 +1,9 @@
 {
   description = "NixOS configuration";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-		home-manager.url = "github:nix-community/home-manager/release-22.11";
+		home-manager.url = "github:nix-community/home-manager/release-23.05";
 		emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
@@ -44,7 +44,7 @@
 				inherit system;
 				specialArgs = { inherit self; };
 				modules = [
-					({config, pkgs, ...}: { nixpkgs.overlays = [ (overlay-unstable system) (import self.inputs.emacs-overlay)]; })
+					({config, pkgs, ...}: { nixpkgs.overlays = [ (overlay-unstable system) (import self.inputs.emacs-overlay) ]; })
 					./configuration.nix
 					home-manager.nixosModules.home-manager
 					{
