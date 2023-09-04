@@ -30,7 +30,9 @@
 					};
 				};
 				commit.gpgSign = true;
-				gpg.format = "ssh";
+				gpg = {
+					format = "ssh";
+				};
 			};
 		};
 	};

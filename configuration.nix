@@ -183,7 +183,6 @@
 	xdg.portal = {
 		enable = true;
 		wlr.enable = true;
-		extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 	};
 
   # List services that you want to enable:
