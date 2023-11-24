@@ -5,7 +5,7 @@ let
 in {
 	options.t3mpt0n.emacs.packages = mkEnableOption "emacs packages";
 
-	config = mkIf config.t3mpt0n.emacs.packages {
+	config = mkIf cfg {
 		programs.emacs = {
 			extraPackages = epgks: with pkgs.emacsPackages; [
 				use-package

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, callPackage, ...}:
+{ config, lib, pkgs,  ...}:
 with lib;
 let
 	cfg = config.t3mpt0n.emacs;
@@ -14,7 +14,8 @@ in {
 			enable = true;
 			defaultEditor = true;
 			package = pkgs.emacs-unstable;
-			client.arguments = [ "-c" "-a" "'emacs'"];
+			socketActivation.enable = true;
+			client.arguments = [ "-c" "-a" "'emacs'" ];
 		};
 	};
 }

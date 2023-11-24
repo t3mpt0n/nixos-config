@@ -30,6 +30,7 @@
 			availableKernelModules = [
 				"cryptd"
 			];
+			network.ssh.enable = true;
 			luks.devices = {
 				cryptlvm = {
 					device = "/dev/disk/by-uuid/ef6af3e5-1d46-4b0a-9a82-6a8e5dd7e4fc";
@@ -190,11 +191,16 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
   	enable = true;
-		settings = {
-			PasswordAuthentication = false;
-			KbdInteractiveAuthentication = false;
-			PermitRootLogin = "no";
-		};
+#		settings = {
+#			PasswordAuthentication = false;
+#			KbdInteractiveAuthentication = false;
+#			PermitRootLogin = "no";
+#			UseDns = true;
+#		};
+#		extraConfig = ''
+#PubkeyAuthentication yes
+#UsePAM yes
+#		'';
   };
 
   # Open ports in the firewall.
